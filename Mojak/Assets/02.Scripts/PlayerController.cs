@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private bool isDead = false;
+
 
     [SerializeField]
     private StageSize stageSize;
@@ -20,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (isDead) return;
+
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
 
@@ -39,5 +43,11 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, stageSize.LimitMin.x, stageSize.LimitMax.x),
                                          Mathf.Clamp(transform.position.y, stageSize.LimitMin.y, stageSize.LimitMax.y));
+    }
+
+    void Die()
+    {
+        isDead = true;
+        GameManager.instance.OnPlayerDead();
     }
 }
