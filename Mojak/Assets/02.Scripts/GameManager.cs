@@ -8,12 +8,21 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public bool isGameover = false;
-    //public Text scoreText;
-    public GameObject gameoverUI;
 
-    //private float TextTime = 0.1f;
-    //private Text text;
+    [SerializeField]
+    private PlayerController playerController;
 
+    public Text scoreText;
+    public Text recordText;
+    public GameObject gameoverUI; // 게임오버시 활성화할 UI 오브젝트.
+
+    private int score = 0;
+
+
+    //private void Start()
+    //{
+    //    Time.timeScale = 1;
+    //}
     private void Awake()
     {
         if (instance == null)
@@ -24,41 +33,45 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        
     }
     
-
     void Update()
-    {
+    {   
         if (isGameover && Input.GetMouseButtonDown(0))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
-    //private IEnumerator TextEffect(float start, float end)
-    //{
-    //    float currentTime = 0.0f;
-    //    float percent = 0.0f;
+  
 
-    //    while (percent < 1)
-    //    {
-    //        currentTime += Time.deltaTime;
-    //        percent = currentTime / TextTime;
-
-    //        Color color = text.color;
-    //        color.r = Mathf.Lerp(start, end, percent);
-    //        color.g = Mathf.Lerp(start, end, percent);
-    //        color.b = Mathf.Lerp(start, end, percent);
-    //        text.color = color;
-
-    //        yield return null;
-    //    }
-    //}
-
-        public void OnPlayerDead()
+    public void OnPlayerDead()
     {
         isGameover = true;
         gameoverUI.SetActive(true);
     }
+
+    public void AddScore(int newScore)
+    {
+        if (isGameover) return;
+        // 점수 출력
+        score += newScore;
+        scoreText.text = "Score :" + score;
+        Debug.Log("점수");
+    }
+
+    public void BestScore()
+    {
+        int bestScore = PlayerPrefs.GetInt("BestScore");
+        if (bestScore < score)
+        {
+            bestScore = score;
+            PlayerPrefs.SetInt("BestScore", bestScore);
+        }
+        recordText.text = "BestScore :" + bestScore;
+    }
+
 
 }

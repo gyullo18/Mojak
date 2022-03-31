@@ -4,18 +4,40 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    // 트리거 콜라이더를 가진 장애물과의 충돌 감지.
-    //    // 1. 충돌한 상대방의 태그가 Dead인지 아닌지 + 아직 사망하지 않았다면
-    //    if (collision.tag == "Enemy" && !isDead)
-    //    {
-    //        Die();
-    //    }
-    //    else if (collision.tag == "Meteor" && !isDead)
-    //    {
-    //        Die();
-    //    }
-    //}
+    // 공격력
+    [SerializeField]
+    private int damage = 1;
+
+    // 처치시 점수 획득
+   [SerializeField]
+    private int scorePoint = 100;
+
+    // 폭발
+    [SerializeField]
+    private GameObject explosionPrefab;
+
+    private PlayerController playerController;
+
+    private void Awake()
+    {
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            // 플레이어 체력감소
+            collision.GetComponent<PlayerController>().DamageHit(damage);
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+    }
+
+    public void EnemyDie()
+    {
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        GameManager.instance.AddScore(scorePoint);
+        GameManager.instance.BestScore();
+        Destroy(gameObject);
+    }
 }

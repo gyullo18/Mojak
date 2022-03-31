@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1747536585371450838}
   - component: {fileID: 1747536585371450833}
   - component: {fileID: 7750430905243871490}
+  - component: {fileID: 4804350276182094874}
+  - component: {fileID: -1804353073757122569}
   m_Layer: 0
   m_Name: Meteor
   m_TagString: Meteor
@@ -108,9 +110,36 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.8}
   serializedVersion: 2
   m_Radius: 0.65
+--- !u!114 &4804350276182094874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747536585371450832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04b382e463a986d49b25da178705d8a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 3
+  explosionPrefab: {fileID: 6023835732944706021, guid: ed0e831ed34469c4db32be6de244bb02, type: 3}
+--- !u!114 &-1804353073757122569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747536585371450832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fc58ab536d733479e7c5d7c66da604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageSize: {fileID: 11400000, guid: 78f05f85f5f621448be28d291f1b04ef, type: 2}

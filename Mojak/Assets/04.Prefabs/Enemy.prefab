@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6480484889108753846}
   - component: {fileID: 6480484889108753847}
   - component: {fileID: 7559314456045200808}
+  - component: {fileID: -6020173131439474434}
+  - component: {fileID: -6594610751559512611}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -114,3 +116,31 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.7
+--- !u!114 &-6020173131439474434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6480484889108753992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7221d3a37f84716469dd00f6d0da3f04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  scorePoint: 100
+  explosionPrefab: {fileID: 6023835732944706021, guid: ed0e831ed34469c4db32be6de244bb02, type: 3}
+--- !u!114 &-6594610751559512611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6480484889108753992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fc58ab536d733479e7c5d7c66da604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageSize: {fileID: 11400000, guid: 78f05f85f5f621448be28d291f1b04ef, type: 2}
