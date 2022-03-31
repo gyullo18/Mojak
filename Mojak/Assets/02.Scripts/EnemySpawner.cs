@@ -10,6 +10,11 @@ public class EnemySpawner : MonoBehaviour
     private GameObject enemyPrefab;
     [SerializeField]
     private float spawnTime;
+    [SerializeField]
+    private GameObject enemyHPPrefab;
+    [SerializeField]
+    private Transform canvas;
+ 
 
     private void Awake()
     {
@@ -21,8 +26,17 @@ public class EnemySpawner : MonoBehaviour
         while (true)
         {
             float posX = Random.Range(stageSize.LimitMin.x, stageSize.LimitMax.x);
-            Instantiate(enemyPrefab, new Vector3(posX, stageSize.LimitMax.y + 1.0f, 0.0f), Quaternion.identity);
+            GameObject enemyClone = Instantiate(enemyPrefab, new Vector3(posX, stageSize.LimitMax.y + 1.0f, 0.0f), Quaternion.identity);
+            // Àû Ã¼·Â ui
+            EnemyHP(enemyClone);
             yield return new WaitForSeconds(spawnTime);
         }
+    }
+
+    private void EnemyHP(GameObject enemy)
+    {
+        GameObject enemyHPClone = Instantiate(enemyHPPrefab);
+        enemyHPClone.transform.SetParent(canvas);
+        enemyHPClone.transform.localScale = Vector3.one;
     }
 }

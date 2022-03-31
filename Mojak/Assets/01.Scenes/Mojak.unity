@@ -464,11 +464,11 @@ GameObject:
   m_Component:
   - component: {fileID: 546509812}
   - component: {fileID: 546509811}
+  - component: {fileID: 546509816}
+  - component: {fileID: 546509817}
   - component: {fileID: 546509815}
   - component: {fileID: 546509814}
   - component: {fileID: 546509813}
-  - component: {fileID: 546509816}
-  - component: {fileID: 546509817}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -695,7 +695,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695653713}
-  m_CullTransparentMesh: 1
+  m_CullTransparentMesh: 0
 --- !u!1 &775998024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,7 +1092,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageSize: {fileID: 11400000, guid: 78f05f85f5f621448be28d291f1b04ef, type: 2}
   enemyPrefab: {fileID: 6480484889108753992, guid: 7fcd528f5c6794f4fa84dde2581c4a5a, type: 3}
-  spawnTime: 0.6
+  spawnTime: 0.4
+  enemyHPPrefab: {fileID: 2342215762124554596, guid: 8a433b85b8734e34a9c9fe172c22eb4f, type: 3}
+  canvas: {fileID: 775998028}
 --- !u!4 &1356396581
 Transform:
   m_ObjectHideFlags: 0

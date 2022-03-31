@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
         if (isGameover && Input.GetMouseButtonDown(0))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Time.timeScale = 1;
         }
     }
 
@@ -51,6 +52,8 @@ public class GameManager : MonoBehaviour
     {
         isGameover = true;
         gameoverUI.SetActive(true);
+        GameManager.instance.BestScore();
+        Time.timeScale = 0;
     }
 
     public void AddScore(int newScore)

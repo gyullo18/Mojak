@@ -131,6 +131,7 @@ MonoBehaviour:
   damage: 1
   scorePoint: 100
   explosionPrefab: {fileID: 6023835732944706021, guid: ed0e831ed34469c4db32be6de244bb02, type: 3}
+  enemyMaxHP: 4
 --- !u!114 &-6594610751559512611
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -72,7 +72,6 @@ public class PlayerController : MonoBehaviour
         if (currentHP <= 0)
         {
             Die();
-            Debug.Log("Die");
         }
         
     }
