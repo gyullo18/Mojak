@@ -10,7 +10,7 @@ public class BackgroundLoop : MonoBehaviour
     private void Awake()
     {
         BoxCollider2D backgroundCollider = GetComponent<BoxCollider2D>();
-        height = backgroundCollider.size.y + 2.48f;
+        height = backgroundCollider.size.y - 0.54f;
     }
 
     void Update()

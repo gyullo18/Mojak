@@ -2,20 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BGMType { Stage =0, Boss }
+
 public class AudioEffect : MonoBehaviour
 {
-    private ParticleSystem explosion;
+    // 보스생성BGM
+    [SerializeField]
+    private AudioClip[] bgmClips;
+    private AudioSource audioSource;
 
     private void Awake()
     {
-        explosion = GetComponent<ParticleSystem>();
+        audioSource = GetComponent<AudioSource>();
     }
 
-    void Update()
+
+    public void ChangeBgm(BGMType index)
     {
-        if (!explosion.isPlaying)
-        {
-            Destroy(gameObject);
-        }
+        // 현재 재생 중인 배경음악 정지
+        audioSource.Stop();
+        // 배경음악 목록에서 Index번째의 음악으로 교체
+        audioSource.clip = bgmClips[(int)index];
+        audioSource.Play();
     }
 }

@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     private int score = 0;
 
+    
+
 
     //private void Start()
     //{
@@ -25,6 +27,8 @@ public class GameManager : MonoBehaviour
     //}
     private void Awake()
     {
+       
+
         if (instance == null)
         {
             instance = this;
@@ -38,7 +42,8 @@ public class GameManager : MonoBehaviour
     }
     
     void Update()
-    {   
+    {
+
         if (isGameover && Input.GetMouseButtonDown(0))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -76,5 +81,5 @@ public class GameManager : MonoBehaviour
         recordText.text = "BestScore :" + bestScore;
     }
 
-
+    
 }

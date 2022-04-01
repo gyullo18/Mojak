@@ -24,6 +24,10 @@ public class Enemy : MonoBehaviour
     private float enemyCurrentHP;
     private SpriteRenderer spriteRenderer;
 
+    // 아이템 드랍 배열(파워, 회복)
+    [SerializeField]
+    private GameObject[] itemPrefabs;
+
     private void Awake()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -74,6 +78,18 @@ public class Enemy : MonoBehaviour
     {
         GameManager.instance.AddScore(scorePoint);
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        // 일정 확률 드랍
+        ItemSpawn();
         Destroy(gameObject);
+    }
+
+    private void ItemSpawn()
+    {
+        // 파워 (10%)
+        int itemSpawn = Random.Range(0, 100);
+        if (itemSpawn < 10)
+        {
+            Instantiate(itemPrefabs[0], transform.position, Quaternion.identity);
+        }
     }
 }

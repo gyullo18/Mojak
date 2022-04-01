@@ -16,10 +16,18 @@ public class Meteor : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            //Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             //운석 공격력만큼 플레이어 체력 감소
             collision.GetComponent<PlayerController>().DamageHit(damage);
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            OnDie();
         }
     }
+
+    public void OnDie()
+    {
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
 }

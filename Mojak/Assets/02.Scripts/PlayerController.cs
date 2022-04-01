@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour
     public float MaxHP => maxHP;
     public float CurrentHP => currentHP;
 
+    // 气藕 积己 虐
+    [SerializeField]
+    private KeyCode keyCodeBoom = KeyCode.Z;
+
     private void Awake()
     {
         movement = GetComponent<Movement>();
@@ -46,10 +50,17 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(keyCodeAtt))
         {
             weapon.StartFiring();
+            Debug.Log("惯荤");
         }
         else if (Input.GetKeyUp(keyCodeAtt))
         {
             weapon.StopFiring();
+        }
+
+        // 气藕 积己
+        if( Input.GetKeyDown(keyCodeBoom))
+        {
+            weapon.StartBoom();
         }
     }
 

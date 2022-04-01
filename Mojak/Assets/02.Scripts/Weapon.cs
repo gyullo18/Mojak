@@ -8,6 +8,13 @@ public class Weapon : MonoBehaviour
     private GameObject bulletPrefab;
     [SerializeField]
     private float firingSpeed = 0.2f; // 발사속도
+    private int level = 1;
+
+    [SerializeField]
+    private GameObject boomPrefab;
+    private int boomCount = 3;
+
+    public int BoomCount => boomCount;
 
     public void StartFiring()
     {
@@ -19,12 +26,45 @@ public class Weapon : MonoBehaviour
         StopCoroutine("Attack");
     }
 
+    public void StartBoom()
+    {
+        if (boomCount > 0)
+        {
+            boomCount--;
+            Instantiate(boomPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
     private IEnumerator Attack()
     {
         while (true)
         {
+            AttackLevel();
             Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             yield return new WaitForSeconds(firingSpeed);
+        }
+    }
+
+    private void AttackLevel()
+    {
+        GameObject cloneBullet = null;
+
+        switch (level)
+        {
+            case 1:
+                Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                break;
+            case 2:
+                Instantiate(bulletPrefab, transform.position + Vector3.left * 0.2f, Quaternion.identity);
+                Instantiate(bulletPrefab, transform.position + Vector3.right * 0.2f, Quaternion.identity);
+                break;
+            case 3:
+                Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                cloneBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                cloneBullet.GetComponent<Movement>().Move(new Vector3(-0.2f, 1, 0));
+                cloneBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                cloneBullet.GetComponent<Movement>().Move(new Vector3(0.2f, 1, 0));
+                break;
         }
     }
 }
