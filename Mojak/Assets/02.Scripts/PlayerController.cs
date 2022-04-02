@@ -22,7 +22,12 @@ public class PlayerController : MonoBehaviour
 
     // 체력 관련 변수 접근
     public float MaxHP => maxHP;
-    public float CurrentHP => currentHP;
+    public float CurrentHP
+    {
+        set => currentHP = Mathf.Clamp(value, 0, maxHP);
+        get => currentHP;
+    }
+   
 
     // 폭탄 생성 키
     [SerializeField]

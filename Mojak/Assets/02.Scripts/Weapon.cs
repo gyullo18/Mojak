@@ -4,17 +4,32 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    // ÃÑ¾Ë
     [SerializeField]
     private GameObject bulletPrefab;
     [SerializeField]
     private float firingSpeed = 0.2f; // ¹ß»ç¼Óµµ
-    private int level = 1;
 
+    // ¾ÆÀÌÅÛ
+    // ÆÄ¿ö
+    [SerializeField]
+    private int maxLevel = 3;
+    private int level = 1;
+    // ÆøÅº
     [SerializeField]
     private GameObject boomPrefab;
     private int boomCount = 3;
+    public int BoomCount
+    {
+        set => boomCount = Mathf.Max(0, value);
+        get => boomCount;
+    }
 
-    public int BoomCount => boomCount;
+    public int Level
+    {
+        set => level = Mathf.Clamp(value, 1, maxLevel);
+        get => level;
+    }
 
     public void StartFiring()
     {
@@ -40,7 +55,7 @@ public class Weapon : MonoBehaviour
         while (true)
         {
             AttackLevel();
-            Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            //Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             yield return new WaitForSeconds(firingSpeed);
         }
     }

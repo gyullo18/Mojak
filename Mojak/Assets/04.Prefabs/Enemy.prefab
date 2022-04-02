@@ -133,7 +133,9 @@ MonoBehaviour:
   explosionPrefab: {fileID: 6023835732944706021, guid: ed0e831ed34469c4db32be6de244bb02, type: 3}
   enemyMaxHP: 4
   itemPrefabs:
-  - {fileID: 4021352744733031598, guid: c5d2683d7bfa5ce4f98b01dda71b5aba, type: 3}
+  - {fileID: 8841950611871128461, guid: cc9c71030e0bc02479590af3cbb0ad0a, type: 3}
+  - {fileID: 7448920205589680960, guid: d67403b789252de4fa272f059b8c16ec, type: 3}
+  - {fileID: 5231832685075257243, guid: ba92b78fbccb8cf4b9c1e26accd2bdb1, type: 3}
 --- !u!114 &-6594610751559512611
 MonoBehaviour:
   m_ObjectHideFlags: 0

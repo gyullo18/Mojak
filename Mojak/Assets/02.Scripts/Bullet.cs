@@ -14,5 +14,14 @@ public class Bullet : MonoBehaviour
             collision.GetComponent<Enemy>().EnemyDamageHit(damage);
             Destroy(gameObject);
         }
+
+        // 태그가 Boss라면
+        else if (collision.CompareTag("Boss"))
+        {
+            // 보스 체력 감소
+            collision.GetComponent<BossHP>().BossDamaged(damage);
+            // 총알 삭제
+            Destroy(gameObject);
+        }
     }
 }
