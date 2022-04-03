@@ -14,21 +14,18 @@ public class GameManager : MonoBehaviour
 
     public Text scoreText;
     public Text recordText;
+    public Text clearText;
     public GameObject gameoverUI; // 게임오버시 활성화할 UI 오브젝트.
 
     private int score = 0;
 
-    
+    // 메뉴 패널 변수
+    public GameObject menuPanel;
 
 
-    //private void Start()
-    //{
-    //    Time.timeScale = 1;
-    //}
+
     private void Awake()
     {
-       
-
         if (instance == null)
         {
             instance = this;
@@ -81,5 +78,37 @@ public class GameManager : MonoBehaviour
         recordText.text = "BestScore :" + bestScore;
     }
 
-    
+    public void ClearBestScore()
+    {
+        int clearBestScore = PlayerPrefs.GetInt("ClearBestScore");
+        if (clearBestScore < score)
+        {
+            clearBestScore = score;
+            PlayerPrefs.SetInt("BestScore", clearBestScore);
+        }
+        clearText.text = "BestScore :" + clearBestScore;
+    }
+
+    public void OnMenu()
+    {
+        menuPanel.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void OffMenu()
+    {
+        menuPanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1;
+
+    }
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }

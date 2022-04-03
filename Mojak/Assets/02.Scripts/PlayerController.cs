@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,8 +9,8 @@ public class PlayerController : MonoBehaviour
     private StageSize stageSize;
     private Movement movement;
 
-    [SerializeField]
-    private KeyCode keyCodeAtt = KeyCode.Space;
+    //[SerializeField]
+    //private KeyCode keyCodeAtt = KeyCode.Space;
     private Weapon weapon;
 
     // 체력
@@ -33,6 +32,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private KeyCode keyCodeBoom = KeyCode.Z;
 
+    // 방향키 설정(9개 방향) - 버튼의 어디를 눌렀는지.
+    public bool[] joyControl;
+    // 방향키 버튼을 눌렀는지
+    public bool isControl;
+    // A버튼을 눌렀는지
+    public bool isButtonA;
+    // B버튼을 눌렀는지
+    public bool isButtonB;
+
     private void Awake()
     {
         movement = GetComponent<Movement>();
@@ -43,6 +51,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+
     private void Update()
     {
         if (isDead) return;
@@ -50,23 +59,43 @@ public class PlayerController : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
 
+        if (joyControl[0]) { x = -1; y = 1; }
+        if (joyControl[1]) { x = 0; y = 1; }
+        if (joyControl[2]) { x = 1; y = 1; }
+        if (joyControl[3]) { x = -1; y = 0; }
+        if (joyControl[4]) { x = 0; y = 0; }
+        if (joyControl[5]) { x = 1; y = 0; }
+        if (joyControl[6]) { x = -1; y = -1; }
+        if (joyControl[7]) { x = 0; y = -1; }
+        if (joyControl[8]) { x = 1; y = -1; }
+
+        if (!isControl) x = 0;
+        if (!isControl) y = 0;
+
         movement.Move(new Vector3(x, y, 0));
 
-        if (Input.GetKeyDown(keyCodeAtt))
-        {
-            weapon.StartFiring();
-            Debug.Log("발사");
-        }
-        else if (Input.GetKeyUp(keyCodeAtt))
-        {
-            weapon.StopFiring();
-        }
+        //if (!isButtonA) return;
+
+        //if (Input.GetKeyDown(keyCodeAtt))
+        //if (isButtonA)
+        //{
+        //    weapon.StartFiring();
+        //    Debug.Log("발사");
+        //}
+        ////else if (Input.GetKeyUp(keyCodeAtt))
+        //else if (!isButtonA)
+        //{
+        //    weapon.StopFiring();
+        //}
+
+        //if (!isButtonB) return;
 
         // 폭탄 생성
-        if( Input.GetKeyDown(keyCodeBoom))
-        {
-            weapon.StartBoom();
-        }
+        //if ( Input.GetKeyDown(keyCodeBoom))
+    //    if (isButtonB)
+    //    {
+    //        weapon.StartBoom();
+    //    }
     }
 
     private void LateUpdate()
@@ -74,6 +103,42 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, stageSize.LimitMin.x, stageSize.LimitMax.x),
                                          Mathf.Clamp(transform.position.y, stageSize.LimitMin.y, stageSize.LimitMax.y));
     }
+
+    public void JoyPanel(int type)
+    {
+        for (int i =0; i < 9; i++)
+        {
+            joyControl[i] = i == type;
+        }
+    }
+    public void JoyDown()
+    {
+        isControl = true;
+    }
+    public void JoyUp()
+    {
+        isControl = false;
+    }
+
+    // A(Attack), B(Boom) 버튼
+    public void ButtonADown()
+    {
+        isButtonA = true;
+        weapon.StartFiring();
+    }
+
+    public void ButtonAUp()
+    {
+        isButtonA = false;
+        weapon.StopFiring();
+    }
+
+    public void ButtonBClick() 
+    {
+        isButtonB = true;
+        weapon.StartBoom();
+    }
+
 
     //피격시
     public void DamageHit(float damage)

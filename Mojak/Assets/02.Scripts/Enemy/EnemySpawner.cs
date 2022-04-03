@@ -13,9 +13,9 @@ public class EnemySpawner : MonoBehaviour
     // 생성 주기
     [SerializeField]
     private float spawnTime;
-    // 적 체력 프리펩
-    [SerializeField]
-    private GameObject enemyHPPrefab;
+    //// 적 체력 프리펩
+    //[SerializeField]
+    //private GameObject enemyHPPrefab;
     // 캔버스 오브젝트
     [SerializeField]
     private Transform canvas;
@@ -54,8 +54,8 @@ public class EnemySpawner : MonoBehaviour
         {
             float posX = Random.Range(stageSize.LimitMin.x, stageSize.LimitMax.x);
             GameObject enemyClone = Instantiate(enemyPrefab, new Vector3(posX, stageSize.LimitMax.y + 1.0f, 0.0f), Quaternion.identity);
-            // 적 체력 ui
-            EnemyHP(enemyClone);
+            //// 적 체력 ui
+            //EnemyHP(enemyClone);
 
             // 적 생성 수 증가
             currentEnemy++;
@@ -68,12 +68,12 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnTime);
         }
     }
-    private void EnemyHP(GameObject enemy)
-    {
-        GameObject enemyHPClone = Instantiate(enemyHPPrefab);
-        enemyHPClone.transform.SetParent(canvas);
-        enemyHPClone.transform.localScale = Vector3.one;
-    }
+    //private void EnemyHP(GameObject enemy)
+    //{
+    //    GameObject enemyHPClone = Instantiate(enemyHPPrefab);
+    //    enemyHPClone.transform.SetParent(canvas);
+    //    enemyHPClone.transform.localScale = Vector3.one;
+    //}
 
     // 보스 코르틴
     private IEnumerator BossSpawn()
